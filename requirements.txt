@@ -1,3 +1,4 @@
 flask
 flask-dotenv
 Flask-Limiter
+flask-smorest
