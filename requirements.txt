@@ -2,3 +2,5 @@ flask
 flask-dotenv
 Flask-Limiter
 flask-smorest
+SQLAlchemy
+Flask-SQLAlchemy
