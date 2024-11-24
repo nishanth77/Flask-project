@@ -16,19 +16,22 @@
 # # return count
 # print(len(logs))
 # print(temp_n)
-# print(count)
+# # print(count)
 
-n = [1,2,3]
-b = [0]* len(n)
-print(b)
+# n = [1,2,3]
+# b = [0]* len(n)
+# print(b)
 
-string = "pcmbzpcmbzp"
-count_c = string.count('c')
-count_m = string.count('m')
-count_z = string.count('z')
+# string = "pcmbzpcmbzp"
+# count_c = string.count('c')
+# count_m = string.count('m')
+# count_z = string.count('z')
 
-min_value = min(count_p, count_c, count_m, count_z)
-print(min_value)
-count_p = string.count('p')
-print(count_p)
+# min_value = min(count_p, count_c, count_m, count_z)
+# print(min_value)
+# count_p = string.count('p')
+# print(count_p)
+vaultkey = "sdb://Azurevaultnov/Windows/Azurevaultnov"
+vault_entity_name = vaultkey.split("/")[2]
 
+print(vault_entity_name)
