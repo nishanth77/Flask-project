@@ -14,13 +14,16 @@ blp = Blueprint("Items", __name__, description="Operations on items")
 class Item(MethodView):
     @blp.response(200, ItemSchema)
     def get(self, item_id):
-        item = ItemModel.query.get_or_404(id=item_id)
+        item = ItemModel.query.get_or_404(item_id)
         return item
         # demo = ItemModel.query_class()
 
     def delete(self, item_id):
         item = ItemModel.query.get_or_404(item_id)
-        raise NotImplementedError()
+        db.session.delete(item)
+        db.session.commit()
+        return {"message": "Item Deleted"}
+        # raise NotImplementedError()
     @blp.arguments(ItemUpdateSchema)
     @blp.response(200, ItemSchema)
     def put(self, item_data, item_id):
