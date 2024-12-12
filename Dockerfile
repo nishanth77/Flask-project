@@ -9,4 +9,4 @@ COPY . .
 # CMD ["flask", "run", "--host", "0.0.0.0"]
 
 # for running gunicorn server in prod
-CMD ["gunicorn", "--bind", "0.0.0.80", "app:create_app()"]
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "app:create_app()"]
