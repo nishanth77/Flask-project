@@ -4,4 +4,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 COPY . .
-CMD ["flask", "run", "--host", "0.0.0.0"]
+
+# for running flask application(dev server)
+# CMD ["flask", "run", "--host", "0.0.0.0"]
+
+# for running gunicorn server in prod
+CMD ["gunicorn", "--bind", "0.0.0.80", "app:create_app()"]
