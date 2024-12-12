@@ -3,14 +3,17 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from flask import Flask, request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
+from flask_jwt_extended import jwt_required
+
 from db import db
 import logging
 from schemas import StoreSchema
 from models import StoreModel
 
+
 blp = Blueprint("Stores", __name__,description="operations on stores model", url_prefix="/api/v1")
 
-@blp.route("/store/<string:store_id>")
+@blp.route("/store/<int:store_id>")
 class Store(MethodView):
     @blp.response(200, StoreSchema)
     def get(self, store_id):
@@ -21,6 +24,7 @@ class Store(MethodView):
         except Exception:
             return {"message": "Store not found"}, 404
 
+    @jwt_required()
     def delete(self, store_id):
         try:
             del_store = StoreModel.query.get_or_404(store_id)
@@ -37,6 +41,7 @@ class StoreList(MethodView):
     def get(self):
         return StoreModel.query.all()
 
+    @jwt_required()
     @blp.arguments(StoreSchema)
     @blp.response(200, StoreSchema)
     def post(self,store_data):
