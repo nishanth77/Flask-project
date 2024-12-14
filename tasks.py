@@ -18,4 +18,4 @@ def send_simple_message(to, subject, body):
         })
 
 def send_user_registration_email(email,username):
-    return send_simple_message(to=email, "Successfully signed Up", f"Hi {username}! You have successfully signed up")
+    return send_simple_message(email, "Successfully signed Up", f"Hi {username}! You have successfully signed up")

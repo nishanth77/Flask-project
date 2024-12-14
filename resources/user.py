@@ -11,19 +11,10 @@ from sqlalchemy import or_
 from db import db
 from models import UserModel
 from schemas import UserSchema, UserRegisterSchema
-
+from tasks import send_user_registration_email
 blp = Blueprint("Users", "users", description="Operations on users")
 
-def send_simple_message(to, subject, body):
-    domain = os.getenv("MAILGUN_DOMAIN")
-    return requests.post(
-        f"https://api.mailgun.net/v3/{domain}/messages",
-        auth = ("api", os.getenv("MAILGUN_API_KEY")),
-        data = { "from": "Nishanth Thangaraj <mailgun@{domain}}>",
-                "to": to,
-                "subject": subject,
-                "text": body
-        })
+
 
 
 @blp.route("/register")
@@ -46,7 +37,7 @@ class UserRegister(MethodView):
         )
         db.session.add(user)
         db.session.commit()
-        send_simple_message(to=user.email, subject="Successfully signed Up", body=f"Hi {user.username}! You have successfully signed up")
+        send_user_registration_email(email=user.email, username=user.username)
         return {"message":"user created successfully"}
     
 
