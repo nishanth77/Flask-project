@@ -23,7 +23,7 @@ class Item(MethodView):
     def delete(self, item_id):
         jwt = get_jwt()
         if not jwt.get("is_admin"):
-            return {"mesage": "Needed a admin priveliage to delete an item"}, 401
+            return {"mesage": "Needed a admin privileage to delete an item"}, 401
         
         item = ItemModel.query.get_or_404(item_id)
         db.session.delete(item)
